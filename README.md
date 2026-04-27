@@ -1,14 +1,14 @@
 # Photonic Basics
 
-This repository documents a step-by-step learning process in integrated photonics, starting from fundamental optical models to more advanced computational architectures.
+This repository documents a step-by-step learning process in integrated photonics, moving from ideal physical models to realistic computational behavior.
 
-The goal is to build physical intuition and engineering criteria for designing photonic systems.
+The objective is to understand how photonic systems perform computation under real-world constraints such as loss and noise.
 
 ---
 
 # Day 1 — Ideal Mach-Zehnder Interferometer (MZI)
 
-We implemented an ideal MZI model based on optical interference:
+We implemented an ideal MZI based on optical interference:
 
 E_out = E1 + E2 · exp(i·phi)  
 I_out = |E_out|²  
@@ -39,7 +39,7 @@ We extended the model to include realistic losses:
 E1 = sqrt(P1) · alpha1  
 E2 = sqrt(P2) · alpha2  
 
-Where alpha represents the transmission factor of each arm.
+Where alpha is the field transmission factor of each arm.
 
 ## Physical Meaning of Alpha
 
@@ -52,46 +52,31 @@ Important: losses affect the **field**, not directly the intensity.
 
 ## Observations
 
-Even with correct phase (phi = pi):
-
-- Perfect cancellation no longer occurs  
-- Minimum intensity is greater than zero  
-- Maximum intensity is reduced  
+- Perfect cancellation is no longer achieved  
+- Minimum intensity increases (I_min > 0)  
+- Maximum intensity decreases  
 
 ---
 
 ## Key Insight
 
-The system no longer satisfies the balance condition:
+The system loses balance:
 
-E1 = E2
-
-Therefore:
-
-E1 - E2 ≠ 0 → incomplete destructive interference
+E1 ≠ E2 → incomplete destructive interference  
 
 ---
 
-# Extinction Ratio and System Usability
+## Separation Between Logical States
 
-In real systems, logic is not determined by absolute values (0 or 1), but by **separation between states**.
-
-## Definitions
-
-Let:
-
-- I_max → maximum output intensity  
-- I_min → minimum output intensity  
-
-### Separation
+Define:
 
 Δ = I_max - I_min  
 
-Larger Δ → better distinction between logical states
+This separation determines how distinguishable the logical states are.
 
 ---
 
-### Extinction Ratio (ER)
+## Extinction Ratio
 
 ER = 10 · log10(I_max / I_min)
 
@@ -102,44 +87,35 @@ ER = 10 · log10(I_max / I_min)
 
 ## Decision Threshold
 
-A practical threshold can be defined as:
-
 T = (I_max + I_min) / 2  
-
-Then:
 
 - I > T → logical 1  
 - I < T → logical 0  
 
 ---
 
-## When is the system usable?
-
-A system is usable when:
-
-(I_max - I_min) >> noise
-
-or equivalently:
-
-I_min is sufficiently smaller than I_max
-
----
-
-## Engineering Rule of Thumb
+## Engineering Rule
 
 - I_min < 0.1 · I_max → acceptable  
-- I_min ≈ I_max → not usable  
+- I_min ≈ I_max → system not usable  
 
 ---
 
-## Critical Insight
+# Day 3 — Noise and Error Probability
 
-The limitation is not that I_min ≠ 0  
+We introduced measurement noise to simulate realistic system behavior:
 
-The real limitation is:
+I_measured = I_real + noise  
 
-lack of separation between states
+Where noise follows a Gaussian distribution:
+
+noise ~ N(0, σ)
 
 ---
 
-# Repository Structure
+## Key Change in Perspective
+
+Previous days:
+
+```text
+Input (phase) → Output (intensity)
