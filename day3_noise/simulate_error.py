@@ -7,9 +7,9 @@ from mzi_noise import mzi_output_lossy, add_noise
 P1 = 1.0
 P2 = 1.0
 alpha1 = 1.0
-alpha2 = 0.7*2
+alpha2 = 0.7
 
-sigma = 0.2*2  # noise level
+sigma = 0.2  # noise level
 
 # logic states
 phi_0 = np.pi      # should be logic 0

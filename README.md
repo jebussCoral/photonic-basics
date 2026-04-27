@@ -246,31 +246,31 @@ To reduce error:
 
 ---
 
-# Repository Structure
+---
 
-photonic-basics/
-├── day1_mzi_model/
-├── day2_mzi_loss/
-├── day3_noise/
-├── day4_xor/
-├── requirements.txt
-└── README.md
+# Day 5 — Cascaded Photonic Logic
+
+In Day 5, we moved from a single photonic logic gate to a small circuit composed of two XOR gates in cascade.
+
+The objective was to understand how error propagates when multiple photonic logic operations are connected sequentially.
 
 ---
 
-# Next Steps
+## Circuit Structure
 
-- maximize Δ (design problem)  
-- cascade MZIs (circuits)  
-- move toward photonic architectures  
-- extend to photonic neural networks  
+The simulated circuit is:
 
----
+C = A XOR B  
+D = C XOR E  
 
-# Final Insight
+or equivalently:
 
-Photonic computation emerges from:
+D = (A XOR B) XOR E  
 
-interference + constraints + statistical decision
+This creates a two-stage logic system:
 
-NOT from predefined digital logic.
+```text
+A ──┐
+    ├── XOR1 ── C ──┐
+B ──┘               ├── XOR2 ── D
+E ──────────────────┘
