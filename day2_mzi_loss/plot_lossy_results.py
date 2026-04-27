@@ -26,7 +26,7 @@ print("Lossy maximum:", max(lossy_values))
 
 plt.figure()
 plt.plot(phi_values, ideal_values, label="Ideal MZI")
-plt.plot(phi_values, lossy_values, label="Lossy MZI: alpha2 = 0.7")
+plt.plot(phi_values, lossy_values, label="Lossy MZI: alpha2 = 0.3")
 
 plt.title("Ideal vs Lossy MZI")
 plt.xlabel("Phase difference phi (rad)")
